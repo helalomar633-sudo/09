@@ -13,7 +13,7 @@
         .card:hover { border-color: #10b981; transform: translateY(-3px); }
         .sidebar-item { transition: 0.3s; cursor: pointer; border-right: 3px solid transparent; }
         .sidebar-item.active { background: #10b9811a; border-right-color: #10b981; color: #10b981; }
-        .btn-green { background-color: #10b981; color: #000; font-weight: bold; transition: 0.3s; }
+        .btn-green { background-color: #10b981; color: #000; font-weight: bold; transition: 0.3s; cursor: pointer; }
         .btn-green:hover { background-color: #059669; box-shadow: 0 0 15px #10b981; }
         .page-section { display: none; animation: fadeIn 0.5s ease; }
         .page-section.active { display: block; }
@@ -65,25 +65,6 @@
                     <h3 class="text-3xl font-bold mt-2">$15,400</h3>
                 </div>
             </div>
-
-            <h3 class="text-xl font-bold mb-6 border-r-4 border-emerald-500 pr-4">الوصول السريع للميزات</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div onclick="showSection('customers')" class="card p-6 rounded-xl cursor-pointer">
-                    <i class="fas fa-filter neon-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">إدارة العملاء المحتملين</h4>
-                    <p class="text-gray-500 text-xs">سحب وإفلات لتحويل العملاء لمبيعات.</p>
-                </div>
-                <div onclick="showSection('invoices')" class="card p-6 rounded-xl cursor-pointer">
-                    <i class="fas fa-receipt neon-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">الفواتير والتقديرات</h4>
-                    <p class="text-gray-500 text-xs">دفع عبر PayPal و Stripe.</p>
-                </div>
-                <div onclick="showSection('support')" class="card p-6 rounded-xl cursor-pointer">
-                    <i class="fas fa-headset neon-text text-2xl mb-4"></i>
-                    <h4 class="font-bold mb-2">نظام دعم التذاكر</h4>
-                    <p class="text-gray-500 text-xs">حل المشكلات عبر البريد التلقائي.</p>
-                </div>
-            </div>
         </section>
 
         <section id="customers" class="page-section">
@@ -103,7 +84,6 @@
                     <input type="text" id="custBudget" placeholder="الميزانية المتوقعة">
                 </div>
             </div>
-
             <div class="card p-8 rounded-2xl">
                 <h3 class="text-xl font-bold mb-4">قائمة العملاء الجدد</h3>
                 <div class="overflow-x-auto">
@@ -116,55 +96,72 @@
                                 <th class="p-3">الميزانية</th>
                             </tr>
                         </thead>
-                        <tbody id="customersTableBody">
-                            </tbody>
+                        <tbody id="customersTableBody"></tbody>
                     </table>
                 </div>
             </div>
         </section>
 
         <section id="projects" class="page-section">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid"></div>
         </section>
 
         <section id="invoices" class="page-section">
-            <div class="card p-8 rounded-2xl">
-                <h3 class="text-xl font-bold mb-6">إنشاء فاتورة احترافية</h3>
-                <div class="space-y-4">
-                    <select class="w-full">
-                        <option>اختر العميل</option>
-                        <option>شركة الأمل</option>
-                        <option>متجر السعادة</option>
-                    </select>
-                    <textarea placeholder="وصف الخدمة أو المشروع..."></textarea>
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="number" placeholder="المبلغ">
-                        <input type="date">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="card p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-6">إنشاء فاتورة احترافية</h3>
+                    <div class="space-y-4">
+                        <select id="invClient" class="w-full">
+                            <option value="">اختر العميل</option>
+                            <option>شركة الأمل</option>
+                            <option>متجر السعادة</option>
+                        </select>
+                        <textarea id="invDesc" placeholder="وصف الخدمة أو المشروع..."></textarea>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="number" id="invAmount" placeholder="المبلغ">
+                            <input type="date" id="invDate">
+                        </div>
+                        <button onclick="saveInvoice()" class="btn-green w-full py-3 rounded-xl mt-4">حفظ الفاتورة</button>
                     </div>
-                    <button class="btn-green w-full py-3 rounded-xl mt-4">إرسال الفاتورة عبر البريد</button>
+                </div>
+                
+                <div class="card p-8 rounded-2xl">
+                    <h3 class="text-xl font-bold mb-6 text-emerald-500">الفواتير المحفوظة</h3>
+                    <div class="overflow-y-auto max-h-[400px]">
+                        <table class="w-full text-right">
+                            <thead>
+                                <tr class="border-b border-gray-800 text-gray-400 text-sm">
+                                    <th class="p-2">العميل</th>
+                                    <th class="p-2">المبلغ</th>
+                                    <th class="p-2">التاريخ</th>
+                                </tr>
+                            </thead>
+                            <tbody id="savedInvoicesList">
+                                </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="support" class="page-section">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="card p-6 rounded-xl">
-                    <h4 class="font-bold mb-4">التذاكر النشطة</h4>
-                    <div class="p-3 border-b border-white/5 flex justify-between">
-                        <span>مشكلة في الدفع</span>
-                        <span class="text-yellow-500 text-xs">قيد الانتظار</span>
-                    </div>
-                    <div class="p-3 border-b border-white/5 flex justify-between">
-                        <span>طلب تعديل تصميم</span>
-                        <span class="text-green-500 text-xs">تم الحل</span>
-                    </div>
-                </div>
-                <div class="card p-6 rounded-xl">
-                    <h4 class="font-bold mb-4">فتح تذكرة جديدة</h4>
-                    <input type="text" placeholder="عنوان المشكلة" class="mb-3">
-                    <textarea placeholder="اشرح المشكلة هنا..."></textarea>
-                    <button class="btn-green w-full py-2 rounded-lg mt-3">فتح تذكرة</button>
+            <div class="card p-12 rounded-3xl text-center border-dashed border-2 border-emerald-500/30">
+                <h3 class="text-2xl font-bold mb-8">قم بتقديم الشكوي هنا اذا وجدت مشكله</h3>
+                
+                <div class="flex flex-col md:flex-row justify-center items-center gap-10">
+                    <a href="https://wa.me/201221546925" target="_blank" class="group">
+                        <div class="w-20 h-20 bg-green-600/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-600 transition-all duration-500">
+                            <i class="fab fa-whatsapp text-4xl text-green-500 group-hover:text-white"></i>
+                        </div>
+                        <p class="text-lg font-mono tracking-wider group-hover:text-green-500 transition-colors">01221546925</p>
+                    </a>
+
+                    <a href="mailto:helalomar633@gmaiil.com" class="group">
+                        <div class="w-20 h-20 bg-blue-600/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-all duration-500">
+                            <i class="fas fa-envelope text-4xl text-blue-500 group-hover:text-white"></i>
+                        </div>
+                        <p class="text-lg group-hover:text-blue-500 transition-colors">helalomar633@gmaiil.com</p>
+                    </a>
                 </div>
             </div>
         </section>
@@ -172,7 +169,6 @@
     </main>
 
     <script>
-        // دالة التنقل بين الأقسام
         function showSection(sectionId, element) {
             document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
@@ -192,7 +188,6 @@
             document.getElementById('pageTitle').innerText = titles[sectionId];
         }
 
-        // دالة إضافة عميل جديد
         function addCustomer() {
             const name = document.getElementById('custName').value;
             const email = document.getElementById('custEmail').value;
@@ -214,16 +209,38 @@
                 </tr>
             `;
             table.innerHTML += row;
-
-            // تفريغ الحقول
             document.getElementById('custName').value = '';
             document.getElementById('custEmail').value = '';
             document.getElementById('custBudget').value = '';
-            
-            alert('تم حفظ العميل وإضافته للقائمة بنجاح!');
+            alert('تم حفظ العميل بنجاح!');
         }
 
-        // توليد 20 مشروع تلقائياً عند تحميل الصفحة
+        function saveInvoice() {
+            const client = document.getElementById('invClient').value;
+            const amount = document.getElementById('invAmount').value;
+            const date = document.getElementById('invDate').value;
+
+            if(!client || !amount || !date) {
+                alert("يرجى إكمال بيانات الفاتورة");
+                return;
+            }
+
+            const list = document.getElementById('savedInvoicesList');
+            const row = `
+                <tr class="border-b border-white/5 hover:bg-white/5 transition">
+                    <td class="p-3 text-sm">${client}</td>
+                    <td class="p-3 text-emerald-500 font-bold">$${amount}</td>
+                    <td class="p-3 text-xs text-gray-500">${date}</td>
+                </tr>
+            `;
+            list.innerHTML += row;
+            
+            // مسح الحقول
+            document.getElementById('invAmount').value = '';
+            document.getElementById('invDesc').value = '';
+            alert("تم حفظ الفاتورة في القائمة");
+        }
+
         function loadProjects() {
             const projectsGrid = document.getElementById('projectsGrid');
             const projectTypes = ["تطوير تطبيق موبايل", "تصميم هوية بصرية", "متجر إلكتروني", "حملة تسويقية", "برمجة CRM"];
@@ -243,7 +260,6 @@
                         </div>
                         <h4 class="font-bold mb-1">${randomType} ${i}</h4>
                         <p class="text-xs text-gray-500 mb-4">عميل: شركة رقم ${i}</p>
-                        
                         <div class="w-full bg-gray-800 h-1 rounded-full mb-2">
                             <div class="bg-emerald-500 h-1 rounded-full" style="width: ${progress}%"></div>
                         </div>
@@ -257,7 +273,6 @@
             }
         }
 
-        // تشغيل الوظائف عند التحميل
         window.onload = loadProjects;
     </script>
 </body>
