@@ -109,16 +109,13 @@
         <section id="invoices" class="page-section">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="card p-8 rounded-2xl">
-                    <h3 class="text-xl font-bold mb-6">إنشاء فاتورة احترافية</h3>
+                    <h3 class="text-xl font-bold mb-6">إنشاء فاتورة</h3>
                     <div class="space-y-4">
-                        <input list="clientsList" id="invClient" placeholder="اكتب اسم العميل أو اختر من القائمة">
+                        <input list="clientsList" id="invClient" placeholder="اكتب اسم العميل">
                         <datalist id="clientsList">
-                            <option value="شركة الأمل">
-                            <option value="متجر السعادة">
-                            <option value="مؤسسة التقنية">
                         </datalist>
 
-                        <textarea id="invDesc" placeholder="وصف الخدمة أو المشروع..."></textarea>
+                        <textarea id="invDesc" placeholder="اسم الخدمة أو المشروع..."></textarea>
                         <div class="grid grid-cols-2 gap-4">
                             <input type="number" id="invAmount" placeholder="المبلغ">
                             <input type="date" id="invDate">
@@ -157,7 +154,7 @@
                         <p class="text-lg font-mono tracking-wider group-hover:text-green-500 transition-colors">01221546925</p>
                     </a>
 
-                    <a href="mailto:helalomar633@gmaiil.com" class="group">
+                    <a href="mailto:helalomar633@gmail.com" class="group">
                         <div class="w-20 h-20 bg-blue-600/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-600 transition-all duration-500">
                             <i class="fas fa-envelope text-4xl text-blue-500 group-hover:text-white"></i>
                         </div>
