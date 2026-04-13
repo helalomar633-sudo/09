@@ -18,7 +18,7 @@
         .page-section { display: none; animation: fadeIn 0.5s ease; }
         .page-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        input, select, textarea { background: #1a1a1a !important; border: 1px solid #333 !important; color: white !important; border-radius: 8px !important; padding: 10px !important; width: 100%; }
+        input, select, textarea { background: #1a1a1a !important; border: 1px solid #333 !important; color: white !important; border-radius: 8px !important; padding: 10px !important; width: 100%; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -26,11 +26,11 @@
     <nav class="fixed top-0 right-0 h-full w-64 bg-[#0a0a0a] border-l border-[#1f1f1f] p-6 z-50">
         <h1 class="text-3xl font-black neon-text mb-10 tracking-widest text-center">ZONE</h1>
         <ul class="space-y-4" id="mainNav">
-            <li onclick="showSection('dashboard')" class="sidebar-item active p-3 rounded flex items-center"><i class="fas fa-home ml-3"></i> لوحة التحكم</li>
-            <li onclick="showSection('customers')" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-users ml-3"></i> العملاء</li>
-            <li onclick="showSection('projects')" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-project-diagram ml-3"></i> المشاريع</li>
-            <li onclick="showSection('invoices')" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-file-invoice-dollar ml-3"></i> الفواتير</li>
-            <li onclick="showSection('support')" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-ticket-alt ml-3"></i> الدعم الفني</li>
+            <li onclick="showSection('dashboard', this)" class="sidebar-item active p-3 rounded flex items-center"><i class="fas fa-home ml-3"></i> لوحة التحكم</li>
+            <li onclick="showSection('customers', this)" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-users ml-3"></i> العملاء</li>
+            <li onclick="showSection('projects', this)" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-project-diagram ml-3"></i> المشاريع</li>
+            <li onclick="showSection('invoices', this)" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-file-invoice-dollar ml-3"></i> الفواتير</li>
+            <li onclick="showSection('support', this)" class="sidebar-item p-3 rounded flex items-center"><i class="fas fa-ticket-alt ml-3"></i> الدعم الفني</li>
         </ul>
     </nav>
 
@@ -50,11 +50,11 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
                 <div class="card p-6 rounded-xl text-center">
                     <p class="text-gray-400 text-sm">إجمالي العملاء</p>
-                    <h3 class="text-3xl font-bold mt-2" id="count-customers">1,240</h3>
+                    <h3 class="text-3xl font-bold mt-2" id="count-customers-val">1,240</h3>
                 </div>
                 <div class="card p-6 rounded-xl text-center">
                     <p class="text-gray-400 text-sm">المشاريع النشطة</p>
-                    <h3 class="text-3xl font-bold mt-2 neon-text">42</h3>
+                    <h3 class="text-3xl font-bold mt-2 neon-text">20</h3>
                 </div>
                 <div class="card p-6 rounded-xl text-center">
                     <p class="text-gray-400 text-sm">الفواتير المعلقة</p>
@@ -87,22 +87,45 @@
         </section>
 
         <section id="customers" class="page-section">
-            <div class="card p-8 rounded-2xl">
+            <div class="card p-8 rounded-2xl mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-xl font-bold">إضافة عميل محتمل جديد</h3>
-                    <button class="btn-green px-4 py-2 rounded-lg text-xs" onclick="alert('تم حفظ العميل!')">حفظ البيانات</button>
+                    <button class="btn-green px-6 py-2 rounded-lg text-xs" onclick="addCustomer()">حفظ البيانات</button>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="اسم العميل">
-                    <input type="email" placeholder="البريد الإلكتروني">
-                    <select>
+                    <input type="text" id="custName" placeholder="اسم العميل">
+                    <input type="email" id="custEmail" placeholder="البريد الإلكتروني">
+                    <select id="custStatus">
                         <option>المرحلة: عميل جديد</option>
                         <option>المرحلة: قيد التواصل</option>
                         <option>المرحلة: تم التفاوض</option>
                     </select>
-                    <input type="text" placeholder="الميزانية المتوقعة">
+                    <input type="text" id="custBudget" placeholder="الميزانية المتوقعة">
                 </div>
             </div>
+
+            <div class="card p-8 rounded-2xl">
+                <h3 class="text-xl font-bold mb-4">قائمة العملاء الجدد</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right">
+                        <thead>
+                            <tr class="border-b border-gray-800 text-gray-500">
+                                <th class="p-3">الاسم</th>
+                                <th class="p-3">الإيميل</th>
+                                <th class="p-3">المرحلة</th>
+                                <th class="p-3">الميزانية</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="page-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
+                </div>
         </section>
 
         <section id="invoices" class="page-section">
@@ -149,22 +172,16 @@
     </main>
 
     <script>
-        function showSection(sectionId) {
-            // 1. إخفاء كل الأقسام
-            document.querySelectorAll('.page-section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // 2. إظهار القسم المطلوب
+        // دالة التنقل بين الأقسام
+        function showSection(sectionId, element) {
+            document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
 
-            // 3. تحديث حالة القائمة الجانبية
-            document.querySelectorAll('.sidebar-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
+            if(element) {
+                document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+                element.classList.add('active');
+            }
 
-            // 4. تحديث العنوان في الهيدر
             const titles = {
                 'dashboard': 'لوحة التحكم',
                 'customers': 'إدارة العملاء',
@@ -174,6 +191,74 @@
             };
             document.getElementById('pageTitle').innerText = titles[sectionId];
         }
+
+        // دالة إضافة عميل جديد
+        function addCustomer() {
+            const name = document.getElementById('custName').value;
+            const email = document.getElementById('custEmail').value;
+            const status = document.getElementById('custStatus').value;
+            const budget = document.getElementById('custBudget').value;
+
+            if(!name || !email) {
+                alert("يرجى ملء البيانات الأساسية");
+                return;
+            }
+
+            const table = document.getElementById('customersTableBody');
+            const row = `
+                <tr class="border-b border-gray-800 hover:bg-white/5 transition">
+                    <td class="p-3">${name}</td>
+                    <td class="p-3 text-gray-400">${email}</td>
+                    <td class="p-3"><span class="bg-emerald-500/10 text-emerald-500 px-2 py-1 rounded text-xs">${status}</span></td>
+                    <td class="p-3 text-emerald-500 font-bold">${budget}</td>
+                </tr>
+            `;
+            table.innerHTML += row;
+
+            // تفريغ الحقول
+            document.getElementById('custName').value = '';
+            document.getElementById('custEmail').value = '';
+            document.getElementById('custBudget').value = '';
+            
+            alert('تم حفظ العميل وإضافته للقائمة بنجاح!');
+        }
+
+        // توليد 20 مشروع تلقائياً عند تحميل الصفحة
+        function loadProjects() {
+            const projectsGrid = document.getElementById('projectsGrid');
+            const projectTypes = ["تطوير تطبيق موبايل", "تصميم هوية بصرية", "متجر إلكتروني", "حملة تسويقية", "برمجة CRM"];
+            const statuses = ["قيد التنفيذ", "مكتمل", "مخطط له"];
+            
+            for (let i = 1; i <= 20; i++) {
+                const randomType = projectTypes[Math.floor(Math.random() * projectTypes.length)];
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                const progress = Math.floor(Math.random() * 100);
+                
+                const card = `
+                    <div class="card p-6 rounded-2xl relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-emerald-500"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs text-gray-500">#PRJ-202${i}</span>
+                            <span class="text-[10px] px-2 py-1 rounded bg-white/5">${randomStatus}</span>
+                        </div>
+                        <h4 class="font-bold mb-1">${randomType} ${i}</h4>
+                        <p class="text-xs text-gray-500 mb-4">عميل: شركة رقم ${i}</p>
+                        
+                        <div class="w-full bg-gray-800 h-1 rounded-full mb-2">
+                            <div class="bg-emerald-500 h-1 rounded-full" style="width: ${progress}%"></div>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px]">
+                            <span>التقدم</span>
+                            <span>${progress}%</span>
+                        </div>
+                    </div>
+                `;
+                projectsGrid.innerHTML += card;
+            }
+        }
+
+        // تشغيل الوظائف عند التحميل
+        window.onload = loadProjects;
     </script>
 </body>
 </html>
