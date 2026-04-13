@@ -111,11 +111,13 @@
                 <div class="card p-8 rounded-2xl">
                     <h3 class="text-xl font-bold mb-6">إنشاء فاتورة احترافية</h3>
                     <div class="space-y-4">
-                        <select id="invClient" class="w-full">
-                            <option value="">اختر العميل</option>
-                            <option>شركة الأمل</option>
-                            <option>متجر السعادة</option>
-                        </select>
+                        <input list="clientsList" id="invClient" placeholder="اكتب اسم العميل أو اختر من القائمة">
+                        <datalist id="clientsList">
+                            <option value="شركة الأمل">
+                            <option value="متجر السعادة">
+                            <option value="مؤسسة التقنية">
+                        </datalist>
+
                         <textarea id="invDesc" placeholder="وصف الخدمة أو المشروع..."></textarea>
                         <div class="grid grid-cols-2 gap-4">
                             <input type="number" id="invAmount" placeholder="المبلغ">
@@ -136,8 +138,7 @@
                                     <th class="p-2">التاريخ</th>
                                 </tr>
                             </thead>
-                            <tbody id="savedInvoicesList">
-                                </tbody>
+                            <tbody id="savedInvoicesList"></tbody>
                         </table>
                     </div>
                 </div>
@@ -219,6 +220,7 @@
             const client = document.getElementById('invClient').value;
             const amount = document.getElementById('invAmount').value;
             const date = document.getElementById('invDate').value;
+            const desc = document.getElementById('invDesc').value;
 
             if(!client || !amount || !date) {
                 alert("يرجى إكمال بيانات الفاتورة");
@@ -235,9 +237,11 @@
             `;
             list.innerHTML += row;
             
-            // مسح الحقول
+            // مسح الحقول بعد الحفظ
+            document.getElementById('invClient').value = '';
             document.getElementById('invAmount').value = '';
             document.getElementById('invDesc').value = '';
+            document.getElementById('invDate').value = '';
             alert("تم حفظ الفاتورة في القائمة");
         }
 
