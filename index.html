@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONE | نظام إدارة علاقات العملاء</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .neon-border { border: 1px solid #10b981; box-shadow: 0 0 10px #10b98133; }
+        .neon-text { color: #10b981; text-shadow: 0 0 5px #10b98166; }
+        .card { background-color: #0f0f0f; transition: transform 0.3s; border: 1px solid #1f1f1f; }
+        .card:hover { transform: translateY(-5px); border-color: #10b981; }
+        .btn-green { background-color: #10b981; color: #000; font-weight: bold; }
+        .btn-green:hover { background-color: #059669; box-shadow: 0 0 15px #10b981; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 right-0 h-full w-64 bg-[#0a0a0a] border-l border-[#1f1f1f] p-6 hidden md:block">
+        <h1 class="text-3xl font-black neon-text mb-10 tracking-widest">ZONE</h1>
+        <ul class="space-y-6">
+            <li class="flex items-center space-x-3 text-emerald-500"><i class="fas fa-home ml-3"></i> لوحة التحكم</li>
+            <li class="flex items-center space-x-3 hover:text-emerald-500 cursor-pointer"><i class="fas fa-users ml-3"></i> العملاء</li>
+            <li class="flex items-center space-x-3 hover:text-emerald-500 cursor-pointer"><i class="fas fa-project-diagram ml-3"></i> المشاريع</li>
+            <li class="flex items-center space-x-3 hover:text-emerald-500 cursor-pointer"><i class="fas fa-file-invoice-dollar ml-3"></i> الفواتير</li>
+            <li class="flex items-center space-x-3 hover:text-emerald-500 cursor-pointer"><i class="fas fa-ticket-alt ml-3"></i> الدعم الفني</li>
+        </ul>
+    </nav>
+
+    <main class="md:mr-64 p-8">
+        <header class="flex justify-between items-center mb-12">
+            <div>
+                <h2 class="text-2xl font-bold">مرحباً بك في <span class="neon-text">ZONE</span></h2>
+                <p class="text-gray-500">إدارة أعمالك أصبحت أكثر احترافية.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="p-2 bg-[#1f1f1f] rounded-full px-4 ml-4"><i class="fas fa-bell"></i></button>
+                <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-black font-bold">AD</div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="card p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">إجمالي العملاء</p>
+                <h3 class="text-3xl font-bold mt-2">1,240</h3>
+            </div>
+            <div class="card p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">المشاريع النشطة</p>
+                <h3 class="text-3xl font-bold mt-2 neon-text">42</h3>
+            </div>
+            <div class="card p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">الفواتير المعلقة</p>
+                <h3 class="text-3xl font-bold mt-2 text-red-500">12</h3>
+            </div>
+            <div class="card p-6 rounded-xl">
+                <p class="text-gray-400 text-sm">الأرباح الشهرية</p>
+                <h3 class="text-3xl font-bold mt-2">$15,400</h3>
+            </div>
+        </div>
+
+        <h3 class="text-xl font-bold mb-6 border-r-4 border-emerald-500 pr-4">المميزات الأساسية للنظام</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-filter neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">إدارة العملاء المحتملين</h4>
+                <p class="text-gray-500 text-sm">تتبع العملاء عبر مراحل السحب والإفلات وتحويلهم لمبيعات حقيقية.</p>
+            </div>
+
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-receipt neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">الفواتير والتقديرات</h4>
+                <p class="text-gray-500 text-sm">إصدار فواتير احترافية وتلقي المدفوعات عبر PayPal و Stripe.</p>
+            </div>
+
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-clock neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">تتبع الوقت والمهام</h4>
+                <p class="text-gray-500 text-sm">مراقبة إنتاجية الموظفين وحساب ساعات العمل بدقة لكل مشروع.</p>
+            </div>
+
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-headset neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">نظام دعم التذاكر</h4>
+                <p class="text-gray-500 text-sm">نظام دعم قوي لاستلام المشاكل من الإيميل وحلها بسرعة.</p>
+            </div>
+
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-folder-open neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">إدارة الوسائط</h4>
+                <p class="text-gray-400 text-sm">مجلدات منفصلة للموظفين لتنظيم ملفات العمل بشكل سري ومحمي.</p>
+            </div>
+
+            <div class="card p-6 rounded-xl">
+                <i class="fas fa-bullseye neon-text text-2xl mb-4"></i>
+                <h4 class="font-bold text-lg mb-2">تتبع الأهداف</h4>
+                <p class="text-gray-400 text-sm">تحديد أهداف المبيعات السنوية ومراقبة مدى تحقيقها.</p>
+            </div>
+        </div>
+
+        <footer class="mt-16 p-8 rounded-2xl bg-gradient-to-l from-emerald-900/20 to-transparent border border-emerald-500/30 text-center">
+            <h3 class="text-2xl font-bold mb-4">جاهز لإطلاق مشروعك؟</h3>
+            <button class="btn-green px-10 py-3 rounded-full uppercase tracking-widest text-sm">ابدأ التجربة المجانية الآن</button>
+        </footer>
+    </main>
+
+</body>
+</html>
